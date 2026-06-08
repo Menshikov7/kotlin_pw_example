@@ -18,7 +18,7 @@ class FirstTests {
     @BeforeSuite
     fun launchBrowser() {
         playwright = Playwright.create()
-        browser = playwright.chromium().launch(BrowserType.LaunchOptions().setHeadless(false))
+        browser = playwright.chromium().launch(BrowserType.LaunchOptions().setHeadless(true))
     }
 
     @AfterSuite
@@ -39,28 +39,11 @@ class FirstTests {
 
     @Test
     fun firstTest() {
-        context.tracing().start(
-            StartOptions()
-                .setScreenshots(true)
-                .setSnapshots(true)
-                .setSources(true)
-        )
-
         page.navigate("https://playwright.dev")
         assertEquals("Fast and reliable end-to-end testing for modern web apps | Playwright", page.title() )
         val getStarted: Locator? = page.getByRole(AriaRole.LINK, Page.GetByRoleOptions().setName("Get Started"))
         assertThat(getStarted).hasAttribute("href", "/docs/intro")
         getStarted?.click()
         assertThat(page.getByRole(AriaRole.LINK, Page.GetByRoleOptions().setName("Installation"))).isVisible()
-
-        context.tracing().stop(
-            StopOptions()
-                .setPath(Paths.get("trace.zip"))
-        )
-    }
-
-    @Test
-    fun shouldClickButton() {
-
     }
 }
