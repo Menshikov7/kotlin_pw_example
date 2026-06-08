@@ -15,6 +15,10 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
       - uses: gradle/gradle-build-action@v2
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew  # <-- новый шаг
+
       - name: Build & Install
         run: ./gradlew build -x test
       - name: Ensure browsers are installed
