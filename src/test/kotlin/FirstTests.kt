@@ -49,7 +49,7 @@ class FirstTests {
         page.navigate("https://playwright.dev")
         assertEquals("Fast and reliable end-to-end testing for modern web apps | Playwright", page.title() )
         val getStarted: Locator? = page.getByRole(AriaRole.LINK, Page.GetByRoleOptions().setName("Get Started"))
-        assertThat(getStarted).hasAttribute("href", "/docs/intro");
+        assertThat(getStarted).hasAttribute("href", "/docs/intro")
         getStarted?.click()
         assertThat(page.getByRole(AriaRole.LINK, Page.GetByRoleOptions().setName("Installation"))).isVisible()
 
